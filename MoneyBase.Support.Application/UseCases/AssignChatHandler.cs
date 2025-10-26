@@ -146,7 +146,7 @@ public class AssignChatHandler
     }
     private async Task<ChatSessionDto> CreateChatAsync(ChatSessionDto chat)
     {
-        var response = await _httpClient.PostAsync<ChatSessionDto, ChatSessionDto>("/chats", chat);
+        var response = await _httpClient.PostAsync<ChatSessionDto, ChatSessionDto>("/add-chat", chat);
         if (!response.Success)
         {
             _logger.LogError("Failed to create chat {ChatId}: {Message}",null, response.Message);
@@ -157,7 +157,7 @@ public class AssignChatHandler
     }
     private async Task<IEnumerable<AgentDto>> LoadAllAgents()
     {
-        var agentsResponse = await _httpClient.GetAsync<IEnumerable<AgentDto>>("/agents");
+        var agentsResponse = await _httpClient.GetAsync<IEnumerable<AgentDto>>("/get-all-agents");
 
         if (!agentsResponse.Success)
         {
