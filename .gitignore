@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MoneyBase.Support.ChatAssignment.APIs/FileContentIndex
+/MoneyBase.Support.Application/bin/Debug/net8.0
+/MoneyBase.Support.Application/obj
+/MoneyBase.Support.ChatAssignment.APIs/bin/Debug/net8.0
+/MoneyBase.Support.ChatAssignment.APIs/obj
+/MoneyBase.Support.Domain/bin/Debug/net8.0
+/MoneyBase.Support.Domain/obj
+/MoneyBase.Support.Infrastructure/bin/Debug/net8.0
+/MoneyBase.Support.Infrastructure/obj
+/MoneyBase.Support.Shared/bin/Debug/net8.0
+/MoneyBase.Support.Shared/obj
+/MoneyBase.UnitTests/bin/Debug/net8.0
+/MoneyBase.UnitTests/obj
