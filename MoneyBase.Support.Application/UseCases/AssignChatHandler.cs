@@ -31,7 +31,7 @@ public class AssignChatHandler
         try
         {
             #region get chat and create If not found in DB (edge case) create initial
-            var chatResponse = await _httpClient.GetAsync<ChatSessionDto>($"/chats/{dto.ChatId}");
+            var chatResponse = await _httpClient.GetAsync<ChatSessionDto>($"/get-chat/{dto.ChatId}");
             if (!chatResponse.Success)
             {
                 _logger.LogError("Failed to load chat {ChatId}: {Message}", dto.ChatId, chatResponse.Message);
@@ -124,6 +124,13 @@ public class AssignChatHandler
     #endregion
 
     #region Private Methods
+    /// <summary>
+    /// Push Chat To Agent Queue
+    /// </summary>
+    /// <param name="agentId"></param>
+    /// <param name="userId"></param>
+    /// <param name="chatId"></param>
+    /// <param name="ct"></param>
     private async void PushChatToAgentQueue(Guid agentId, string userId, Guid chatId, CancellationToken ct)
     {
         var message = new ChatAssignedMessage
@@ -139,7 +146,7 @@ public class AssignChatHandler
     }
     private async Task<ChatSessionDto> CreateChatAsync(ChatSessionDto chat)
     {
-        var response = await _httpClient.PostAsync<ChatSessionDto, ChatSessionDto>("api/chats", chat);
+        var response = await _httpClient.PostAsync<ChatSessionDto, ChatSessionDto>("/chats", chat);
         if (!response.Success)
         {
             _logger.LogError("Failed to create chat {ChatId}: {Message}",null, response.Message);
@@ -188,7 +195,7 @@ public class AssignChatHandler
     {
         chat.UpdatedDate = DateTime.UtcNow;
         chat.UpdatedBy = 0; //system 
-        var response = await _httpClient.PutAsync<ChatSessionDto, ChatSessionDto>($"{chat.Id}/update-chat", chat);
+        var response = await _httpClient.PutAsync<ChatSessionDto, ChatSessionDto>($"/update-chat/{chat.Id}", chat);
         if (!response.Success)
         {
             _logger.LogError("Failed to update chat {ChatId}: {Message}", chat.Id, response.Message);

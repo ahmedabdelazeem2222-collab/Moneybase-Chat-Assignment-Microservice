@@ -62,7 +62,7 @@ namespace MoneyBase.Support.Infrastructure.HostedServices
                             session.ChatStatus = Domain.Enums.ChatStatusEnum.InActive;
 
                             // Update session via API
-                            var updateSessionResponse = await _genericHttpClient.PutAsync<ChatSessionDto, ChatSessionDto>($"/chats/{session.Id}/", session);
+                            var updateSessionResponse = await _genericHttpClient.PutAsync<ChatSessionDto, ChatSessionDto>($"/update-chat/{session.Id}/", session);
                             if (!updateSessionResponse.Success)
                             {
                                 _logger.LogWarning($"Failed to update chat session {session.Id} via API");
@@ -74,14 +74,14 @@ namespace MoneyBase.Support.Infrastructure.HostedServices
                             if (!string.IsNullOrEmpty(session.AgentId.ToString()))
                             {
                                 // Load agent from API
-                                var agentResponse = await _genericHttpClient.GetAsync<AgentDto>($"/agents/{session.AgentId}");
+                                var agentResponse = await _genericHttpClient.GetAsync<AgentDto>($"/get-agent/{session.AgentId}");
                                 if (agentResponse.Success && agentResponse.Data != null)
                                 {
                                     var agent = agentResponse.Data;
                                     agent.AssignedChatIds.ToList().Remove(session.Id.ToString());
 
                                     // Update agent via API
-                                    var updateAgentResponse = await _genericHttpClient.PostAsync<AgentDto, AgentDto>($"/agents/{agent.Id}", agent);
+                                    var updateAgentResponse = await _genericHttpClient.PostAsync<AgentDto, AgentDto>($"/update-agent/{agent.Id}", agent);
                                     if (updateAgentResponse.Success)
                                     {
                                         _logger.LogInformation($"Removed chat session {session.Id} from agent {agent.Id} and freed agent slots");

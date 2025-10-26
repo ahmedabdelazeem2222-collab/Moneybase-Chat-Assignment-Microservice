@@ -25,15 +25,15 @@ builder.Services.AddMoneyBaseServices(builder.Configuration)
                 .AddHostedServices();
 #endregion
 
-
+string chatAPIUrl = builder.Configuration["ApisUrl:ChatAPIUrl"];
 builder.Services.AddHttpClient<IGenericHttpClient, GenericHttpClient>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:5000/internal"); // replace with actual URL
+    client.BaseAddress = new Uri(chatAPIUrl);
 });
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello from MoneyBase.Support.ChatAssignment.APIs");
+app.MapGet("/health", () => "Hello from MoneyBase.Support.ChatAssignment.APIs");
 
 if (app.Environment.IsDevelopment())
 {
