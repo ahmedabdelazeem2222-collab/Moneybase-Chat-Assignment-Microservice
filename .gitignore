@@ -15,3 +15,9 @@
 /MoneyBase.Support.Shared/obj
 /MoneyBase.UnitTests/bin/Debug/net8.0
 /MoneyBase.UnitTests/obj
+/.vs/MoneyBase.Support.ChatAssignment.APIs/DesignTimeBuild
+/.vs/ProjectEvaluation
+*.v2
+/.vs/MoneyBase.Support.ChatAssignment.APIs/v17/.suo
+/.vs/MoneyBase.Support.ChatAssignment.APIs/v17/DocumentLayout.backup.json
+/.vs/MoneyBase.Support.ChatAssignment.APIs/v17/DocumentLayout.json
