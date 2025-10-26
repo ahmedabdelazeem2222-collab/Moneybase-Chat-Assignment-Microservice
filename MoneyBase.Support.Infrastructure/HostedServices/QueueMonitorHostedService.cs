@@ -2,10 +2,8 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MoneyBase.Support.Application.DTOs;
-using MoneyBase.Support.Application.Interfaces;
 using MoneyBase.Support.Shared;
 using System;
-using System.Net.Http;
 using System.Text.Json;
 
 namespace MoneyBase.Support.Infrastructure.HostedServices

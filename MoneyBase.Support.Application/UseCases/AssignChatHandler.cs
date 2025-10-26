@@ -30,7 +30,7 @@ public class AssignChatHandler
     {
         try
         {
-            #region get chate and create If not found in DB (edge case) create initial
+            #region get chat and create If not found in DB (edge case) create initial
             var chatResponse = await _httpClient.GetAsync<ChatSessionDto>($"/chats/{dto.ChatId}");
             if (!chatResponse.Success)
             {
@@ -84,7 +84,7 @@ public class AssignChatHandler
 
             #endregion
 
-            #region Round robin: iterate candidates and assign i until we find one below capacity
+            #region Round robin: iterate candidates and assign it until we find one below capacity
 
             // Try assign: prioritize junior -> mid -> senior -> teamlead
             var now = _shiftService.GetCairoNow();
@@ -131,7 +131,7 @@ public class AssignChatHandler
             ChatId = chatId,
             AgentId = agentId,
             UserId = userId,
-            Channel = "mobile",
+            Channel = ChannelEnum.Web.ToString(),
             AssignedAt = DateTime.UtcNow
         };
 
